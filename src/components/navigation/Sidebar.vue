@@ -48,7 +48,7 @@
         </ul>
       </li>
       <li>
-        <button @click="goToFullURL('https://rpdl.net/news/')">
+        <button @click="goToFullURL('https://rpdl.net/tag/news/')">
           <span>News</span>
         </button>
       </li>

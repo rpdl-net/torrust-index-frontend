@@ -47,19 +47,20 @@
           </li>
         </ul>
       </li>
-      <li class="mt-6">
-        <h3 class="py-2 text-slate-400 font-semibold">Resources</h3>
-        <ul>
-          <button @click="this.window.location='https://rpdl.net/news/'">
-            <span>News</span>
-          </button>
-          <button @click="this.window.location='https://rpdl.net/faq/'">
-            <span>Frequently Asked Questions</span>
-          </button>
-          <button @click="this.window.location='https://rpdl.net/tools/'">
-            <span>Third Party Tools</span>
-          </button>
-        </ul>
+      <li>
+        <button @click="goToFullURL('https://rpdl.net/news/')">
+          <span>News</span>
+        </button>
+      </li>
+      <li>
+        <button @click="goToFullURL('https://rpdl.net/faq/')">
+          <span>FAQ</span>
+        </button>
+      </li>
+      <li>
+        <button @click="goToFullURL('https://rpdl.net/tools/')">
+          <span>Third Party Tools</span>
+        </button>
       </li>
     </ul>
   </nav>
@@ -106,6 +107,9 @@ export default {
       if (this.$route.path !== url) {
         this.$router.push(url)
       }
+    },
+    goToFullURL(url){
+      window.open(url);
     }
   },
 }

@@ -162,7 +162,7 @@ export default {
         if(download){
           this.downloadTorrent();
         }
-        this.updateUrlWithTitle();
+        // this.updateUrlWithTitle();
       }).catch(() => {
         this.loading = false;
       })

@@ -47,20 +47,25 @@
           </li>
         </ul>
       </li>
-      <li>
-        <button @click="goToFullURL('https://rpdl.net/tag/news/')">
-          <span>News</span>
-        </button>
-      </li>
-      <li>
-        <button @click="goToFullURL('https://rpdl.net/faq/')">
-          <span>FAQ</span>
-        </button>
-      </li>
-      <li>
-        <button @click="goToFullURL('https://rpdl.net/tools/')">
-          <span>Third Party Tools</span>
-        </button>
+      <li class="mt-10">
+        <h3 class="py-2 text-slate-400 font-semibold">Resources</h3>
+        <ul>
+          <li>
+            <button @click="goToFullURL('https://rpdl.net/tag/news/')">
+              <span>News</span>
+            </button>
+          </li>
+          <li>
+            <button @click="goToFullURL('https://rpdl.net/faq/')">
+              <span>FAQ</span>
+            </button>
+          </li>
+          <li>
+            <button @click="goToFullURL('https://rpdl.net/tools/')">
+              <span>Third Party Tools</span>
+            </button>
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>

@@ -1,40 +1,65 @@
 <template>
   <div class="relative inline-block text-left" v-click-outside="() => (dropdownOpened = false)">
 
-    <button v-if="$store.getters.isLoggedIn" class="px-4 py-1.5 rounded-md border border-slate-800 text-sm text-slate-400 flex items-center relative cursor-pointer transition duration-200 hover:text-slate-200 hover:border-slate-200" @click="dropdownOpened = !dropdownOpened">
-      <UserCircleIcon size="16" class="mr-1 opacity-50" />
-      {{ user.username }}
+    <span
+        v-if="$store.getters.isLoggedIn"
+        id="profile-button"
+        class="px-4 h-10 inline-flex justify-center items-center self-start appearance-none bg-slate-800 hover:bg-slate-700 dark:bg-white/5 dark:hover:bg-white/10 text-sm text-white font-medium rounded-2xl cursor-pointer duration-200"
+        @click="dropdownOpened = !dropdownOpened"
+        @mouseleave="dropdownOpened = false"
+    >
+      <UserCircleIcon size="24" class="mr-3" />
+      <span class="flex flex-nowrap whitespace-nowrap">{{ user.username }}</span>
       <ChevronDownIcon
-          class="w-5 h-5 ml-2 -mr-1"
+          class="w-5 h-5 ml-2 -mr-1 opacity-50"
           aria-hidden="true"
       />
-    </button>
-
-    <button v-else class="px-4 py-1.5 bg-sky-500 text-sm text-white border border-sky-500 rounded-md transition duration-200 hover:shadow-lg hover:shadow-sky-500/25" @click="$store.dispatch('openAuthModal')">
-      Sign in
-    </button>
-
-    <div class="origin-top-right absolute right-0 mt-2 z-10" :class="{hidden: !dropdownOpened}">
-      <div @click.prevent="() => (dropdownOpened = false)" class="py-2 px-2 w-48 flex flex-col bg-slate-800 text-sm rounded-md shadow-lg">
-        <router-link v-if="$store.getters.isAdministrator" to="/settings" replace class="py-1.5 text-center text-slate-100 border border-transparent rounded-md transition duration-200 hover:bg-slate-700 hover:border-slate-700">
-          <span>Settings</span>
-        </router-link>
-        <hr class="my-2 border-slate-700" />
-        <button @click="$store.dispatch('logout')" class="py-1.5 bg-red-500 bg-opacity-10 text-red-400 border border-transparent rounded-md transition duration-200 hover:text-red-500">Sign out</button>
+      <div
+          class="absolute pt-60 z-10"
+          :class="{hidden: !dropdownOpened}"
+      >
+        <div @click.prevent="dropdownOpened = false" class="w-48 divide-y divide-slate-100 bg-slate-800 dark:bg-dark-800 rounded-2xl overflow-hidden drop-shadow">
+          <ul class="text-sm text-slate-400 dark:text-dark-400 font-medium duration-200" aria-labelledby="dropdownDefault">
+            <li class="p-4 w-full hover:bg-slate-700 dark:hover:bg-dark-700 hover:text-white duration-200">
+              <router-link :to="`/profile/${user.username}`" replace class="inline-flex items-center">
+                <span class="flex flex-nowrap whitespace-nowrap">My Profile</span>
+              </router-link>
+            </li>
+            <li class="p-4 w-full hover:bg-slate-700 dark:hover:bg-dark-700 hover:text-white duration-200">
+              <router-link to="/settings/general" replace class="inline-flex items-center">
+                <span class="flex flex-nowrap whitespace-nowrap">Settings</span>
+              </router-link>
+            </li>
+            <li class="p-4 w-full hover:bg-red-700 dark:hover:bg-dark-700 hover:text-white duration-200">
+              <a @click="$store.dispatch('logout')" class="inline-flex items-center">
+                <span class="flex flex-nowrap whitespace-nowrap">Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </span>
+
+    <button
+        v-else
+        id="sign-in-button"
+        class="px-4 h-10 inline-flex justify-center items-center self-start appearance-none bg-slate-800 dark:bg-white/5 hover:bg-slate-700 dark:hover:bg-white/10 text-sm text-white font-medium rounded-2xl cursor-pointer duration-200"
+        @click="$store.dispatch('openAuthModal')"
+    >
+      <UserCircleIcon size="24" class="mr-3" />
+      <span class="flex flex-nowrap whitespace-nowrap">Sign in</span>
+    </button>
 
   </div>
 </template>
 
 <script>
-import {UserIcon} from "@vue-hero-icons/outline";
 import { ChevronDownIcon, UserCircleIcon } from '@vue-hero-icons/solid'
 import {mapState} from "vuex";
 
 export default {
   name: "Profile",
-  components: {UserIcon, ChevronDownIcon, UserCircleIcon},
+  components: {ChevronDownIcon, UserCircleIcon},
   data: () => ({
     dropdownOpened: false,
   }),

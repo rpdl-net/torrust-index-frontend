@@ -121,6 +121,6 @@ td {
 }
 
 tbody tr {
-  @apply cursor-pointer bg-transparent hover:bg-gradient-to-r hover:from-slate-800/10 hover:via-slate-800/30 hover:to-slate-800/10 transition duration-200;
+  @apply cursor-pointer bg-transparent dark:bg-dark-800 hover:bg-gradient-to-r hover:from-slate-800/10 hover:via-slate-800/30 hover:to-slate-800/10 rounded-2xl transition duration-200;
 }
 </style>
